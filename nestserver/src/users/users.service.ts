@@ -14,6 +14,10 @@ export class UsersService {
     @InjectRepository(Posts)
     private postRepository: Repository<Posts>,
   ) { }
+
+  async findByEmal(email: string) {
+    return this.userRepository.findOne({ where: { email } });
+  }
   // 회원가입
   async create(email: string, name: string, age: number, job: string) {
     const exUser = await this.userRepository.findOne({ where: { email } });
@@ -41,22 +45,6 @@ export class UsersService {
       ])
       .where('user.id = :id', { id: 1 })
       .getOne();
-    // const exInfo = await this.userRepository.findOne({
-    //   where: { id: 2 },
-    //   relations: ["Posts"],
-    // })
     return exInfo;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 }
