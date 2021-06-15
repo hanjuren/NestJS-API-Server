@@ -7,7 +7,9 @@ import { UsersModule } from './users/users.module';
 import config from '../typeormconfig';
 import { Users } from './entities/user.entity';
 import { Posts } from './entities/posts.entity';
-import { AuthModule } from './auth/auth.module';
+
+import { Reviews } from './entities/review.entity';
+import { Notices } from './entities/notice.entity';
 
 @Module({
   imports: [
@@ -15,9 +17,8 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
     }),
     UsersModule,
-    AuthModule,
     TypeOrmModule.forRoot(config),
-    TypeOrmModule.forFeature([Users, Posts]),
+    TypeOrmModule.forFeature([Users, Posts, Reviews, Reviews, Notices]),
   ],
   controllers: [AppController],
   providers: [AppService],
