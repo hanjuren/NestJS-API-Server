@@ -9,6 +9,9 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
+  "eslint.workingDirectories": [
+    "src"
+  ],
   root: true,
   env: {
     node: true,

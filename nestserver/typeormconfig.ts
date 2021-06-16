@@ -18,7 +18,7 @@ const config: TypeOrmModuleOptions = {
   migrations: [__dirname + '/src/migrations/*.ts'],
   cli: { migrationsDir: 'src/migrations' },
   autoLoadEntities: true,
-  synchronize: true,
+  synchronize: false,
   logging: true,
   keepConnectionAlive: true,
 };

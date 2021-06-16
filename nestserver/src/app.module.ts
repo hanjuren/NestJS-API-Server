@@ -7,9 +7,9 @@ import { UsersModule } from './users/users.module';
 import config from '../typeormconfig';
 import { Users } from './entities/user.entity';
 import { Posts } from './entities/posts.entity';
-
 import { Reviews } from './entities/review.entity';
 import { Notices } from './entities/notice.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +19,7 @@ import { Notices } from './entities/notice.entity';
     UsersModule,
     TypeOrmModule.forRoot(config),
     TypeOrmModule.forFeature([Users, Posts, Reviews, Reviews, Notices]),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
