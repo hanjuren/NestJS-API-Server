@@ -1,11 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ForbiddenException, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ForbiddenException, Req, UseGuards, Inject, forwardRef } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from 'src/auth/auth.service';
+import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(
+    private readonly usersService: UsersService,
+    @Inject(forwardRef(() => AuthService))
+    private readonly authService: AuthService,
+    ) { }
 
   // @Post()
   // async create(@Body() data: CreateUserDto) {
@@ -23,11 +29,10 @@ export class UsersController {
   // }
   // // 유저 정보 보기
 
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Req() req) {
-    console.log(req);
-    return req.user;
+    return this.authService.login(req.user);
   }
                                                                           
 }
