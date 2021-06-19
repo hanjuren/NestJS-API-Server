@@ -22,9 +22,12 @@ export class UsersController {
   //   }
   // }
   // // 유저 정보 보기
-  // @Get()
-  // async findAllUserInfo() {
-  //   const info = await this.usersService.findAllUserInfo();
-  //   return info;
-  // }
+
+  @UseGuards(AuthGuard('local'))
+  @Post('login')
+  async login(@Req() req) {
+    console.log(req);
+    return req.user;
+  }
+                                                                          
 }

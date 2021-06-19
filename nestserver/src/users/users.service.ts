@@ -6,9 +6,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Users } from '../entities/user.entity';
 import { Posts } from 'src/entities/posts.entity';
 
-
-export type User = any;
-
 @Injectable()
 export class UsersService {
   constructor(
@@ -18,22 +15,10 @@ export class UsersService {
     private postRepository: Repository<Posts>,
   ) { }
 
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'juren',
-      password: '1234',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
+  async findOneEmail(email: string): Promise<Users | undefined> {
+    return this.userRepository.findOne({ where: { email } });
+  };
 
-  async findOne(username: string): Promise<User | undefined> {
-    return this.users.find(user => user.username === username);
-  }
   // async findByEmal(email: string) {
   //   const user = await this.userRepository.findOne({ where: { email } });
   //   console.log(user);
