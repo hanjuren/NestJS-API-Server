@@ -1,8 +1,15 @@
+import e from "express";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Dilbs } from "./dilbs.entity";
 import { Notices } from "./notice.entity";
 import { Posts } from "./posts.entity";
 import { Reviews } from "./review.entity";
+
+export enum UserRole {
+  ADMIN = "admin",
+  EDITOR = "editor",
+  GHOST = "ghost"
+}
 
 @Entity()
 export class Users {
@@ -21,6 +28,14 @@ export class Users {
 
   @Column('varchar', { name: 'job', length: 10 })
   job: string;
+
+  @Column({
+    name: 'role',
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.ADMIN
+  })
+  role: UserRole;
 
   @OneToMany(() => Posts, (posts) => posts.User)
   Posts: Posts[];

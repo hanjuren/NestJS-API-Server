@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from 'src/entities/user.entity';
 import { UsersModule } from 'src/users/users.module';
 import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './guards/jwt.auth.guard';
+import { RolesGuard } from './guards/roles.guard';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
 import { SessionSerializer } from './session.serializer';
@@ -19,7 +21,7 @@ import { SessionSerializer } from './session.serializer';
       signOptions: { expiresIn: '60s' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, SessionSerializer, JwtStrategy],
+  providers: [AuthService, LocalStrategy, SessionSerializer, JwtStrategy, RolesGuard, JwtAuthGuard],
   exports: [AuthService, JwtModule],
 })
 export class AuthModule { }

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Users } from '../entities/user.entity';
+import { UserRole, Users } from '../entities/user.entity';
 import { Posts } from 'src/entities/posts.entity';
 
 @Injectable()
@@ -24,21 +24,26 @@ export class UsersService {
   //   console.log(user);
   //   return user;
   // }
-  // // 회원가입
-  // async create(email: string, name: string, age: number, job: string) {
-  //   const exUser = await this.userRepository.findOne({ where: { email } });
-  //   if (exUser) {
-  //     throw new UnauthorizedException('이미 존재하는 사용자 입니다.');
-  //   }
-  //   await this.userRepository.save({
-  //     email,
-  //     name,
-  //     age,
-  //     job,
-  //   });
-  //   return true;
-  // }
+  // 회원가입
+  async create(email: string, name: string, age: number, job: string, role: UserRole) {
+    const exUser = await this.userRepository.findOne({ where: { email } });
+    if (exUser) {
+      throw new UnauthorizedException('이미 존재하는 사용자 입니다.');
+    }
+    await this.userRepository.save({
+      email,
+      name,
+      age,
+      job,
+      role,
+    });
+    return true;
+  }
 
+  async allUserGet() {
+    const data = await this.userRepository.find();
+    return data;
+  }
   // async findAllUserInfo() {
   //   const exInfo = this.userRepository
   //     .createQueryBuilder('user')
