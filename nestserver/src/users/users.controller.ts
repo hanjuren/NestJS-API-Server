@@ -36,11 +36,15 @@ export class UsersController {
   @Roles(UserRole.ADMIN, UserRole.GHOST)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
-  async allUserGet() {
-    const data = await this.usersService.allUserGet();
-    return data;
+  async allUserGet(@Req() req) {
+      const data = await this.usersService.allUserGet();
+      return data;
   }
 
+  // @Get('all')
+  // async all() {
+  //   return this.authService.
+  // }
   // 로그인
   @UseGuards(LocalAuthGuard)
   @Post('login')

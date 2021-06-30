@@ -20,6 +20,10 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { no: user.id, email: user.email, age: user.age, role: user.role };
-    return { access_token: this.jwtService.sign(payload) };
+    return { access_token: this.jwtService.sign(payload), refresh_token: this.jwtService.sign(payload) };
+  }
+
+  tokenUnauthorized () {
+    return "this token is Unauthorized"
   }
 }

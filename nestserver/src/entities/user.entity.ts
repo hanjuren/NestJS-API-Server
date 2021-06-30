@@ -1,4 +1,3 @@
-import e from "express";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Dilbs } from "./dilbs.entity";
 import { Notices } from "./notice.entity";

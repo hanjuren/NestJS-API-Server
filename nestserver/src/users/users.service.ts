@@ -58,4 +58,7 @@ export class UsersService {
   //     .getOne();
   //   return exInfo;
   // }
+  fuck() {
+    return 'fjkdlfjlkas';
+  }
 }
