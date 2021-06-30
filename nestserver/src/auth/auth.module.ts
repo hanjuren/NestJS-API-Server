@@ -14,14 +14,14 @@ import { SessionSerializer } from './session.serializer';
 @Module({
   imports: [
     forwardRef(() => UsersModule),
-    PassportModule.register({ session: true }), 
+    PassportModule.register({ defaultStrategy: 'jwt' }), 
     TypeOrmModule.forFeature([Users]),
     JwtModule.register({
       secret: 'hanjuren',
       signOptions: { expiresIn: '60s' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, SessionSerializer, JwtStrategy, RolesGuard, JwtAuthGuard],
+  providers: [AuthService, LocalStrategy, JwtStrategy, RolesGuard, JwtAuthGuard],
   exports: [AuthService, JwtModule],
 })
 export class AuthModule { }

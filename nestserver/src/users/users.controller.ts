@@ -8,6 +8,7 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.auth.guard';
 import { Roles } from 'src/auth/dacorator/roles.decorator';
 import { UserRole } from 'src/entities/user.entity';
+import { Request } from 'express';
 
 @Controller('users')
 export class UsersController {
@@ -38,7 +39,8 @@ export class UsersController {
   @Get()
   async allUserGet(@Req() req) {
       const data = await this.usersService.allUserGet();
-      return data;
+      const token = req.headers.authorization;
+      return {data, token};
   }
 
   // @Get('all')
@@ -48,7 +50,7 @@ export class UsersController {
   // 로그인
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Req() req) {
+  async login(@Req() req: Request) {
     return this.authService.login(req.user);
   }
                                                                           

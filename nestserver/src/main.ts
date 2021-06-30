@@ -10,18 +10,18 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.use(cookieParser());
-  app.use(
-    session({
-      resave: false,
-      saveUninitialized: false,
-      secret: process.env.COOKIE_SECRET,
-      cookie: {
-        httpOnly: true,
-      },
-    }),
-  );
+  // app.use(
+  //   session({
+  //     resave: false,
+  //     saveUninitialized: false,
+  //     secret: process.env.COOKIE_SECRET,
+  //     cookie: {
+  //       httpOnly: true,
+  //     },
+  //   }),
+  // );
   app.use(passport.initialize());
-  app.use(passport.session());
+  // app.use(passport.session());
 
   await app.listen(3000);
 
