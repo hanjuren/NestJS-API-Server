@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import { ValidationPipe } from '@nestjs/common';
 
 declare const module: any;
 
@@ -22,6 +23,15 @@ async function bootstrap() {
   // );
   app.use(passport.initialize());
   // app.use(passport.session());
+
+  // ValidationPipe
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // 엔티티 데코레이터에 없는 값은 거름
+      forbidNonWhitelisted: true, // 엔티티 데코레이터에 없는 값이 들어오면 해당 값에 대한 에러 메시지 리턴
+      transform: true // 컨트롤러가 값을 받을 때 컨트롤러에 정의한 타입으로 형 변환
+    })
+  );
 
   await app.listen(3000);
 

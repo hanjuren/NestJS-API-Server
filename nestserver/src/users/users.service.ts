@@ -25,17 +25,14 @@ export class UsersService {
   //   return user;
   // }
   // 회원가입
-  async create(email: string, name: string, age: number, job: string, role: UserRole) {
+  async create(userData: CreateUserDto) {
+    const email = userData.email;
     const exUser = await this.userRepository.findOne({ where: { email } });
     if (exUser) {
       throw new UnauthorizedException('이미 존재하는 사용자 입니다.');
     }
     await this.userRepository.save({
-      email,
-      name,
-      age,
-      job,
-      role,
+      ...userData
     });
     return true;
   }

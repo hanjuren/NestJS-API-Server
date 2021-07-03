@@ -20,13 +20,7 @@ export class UsersController {
   // 회원가입 
   @Post()
   async create(@Body() data: CreateUserDto) {
-    const result = await this.usersService.create(
-      data.email,
-      data.name,
-      data.age,
-      data.job,
-      data.role,
-    );
+    const result = await this.usersService.create(data);
     if (result) {
       return { success: true, message: '회원가입 성공입니다.' };
     } else {
