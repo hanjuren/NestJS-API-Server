@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ForbiddenException, Req, UseGuards, Inject, forwardRef } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ForbiddenException, Req, UseGuards, Inject, forwardRef, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -37,10 +37,12 @@ export class UsersController {
       return {data, token};
   }
 
-  // @Get('all')
-  // async all() {
-  //   return this.authService.
-  // }
+  @Get('all')
+  async all(@Query() query: any) {
+    console.log(query);
+    const id = query.id;
+    return this.usersService.findAllUserInfo(id);
+  }
   // 로그인
   @UseGuards(LocalAuthGuard)
   @Post('login')

@@ -41,20 +41,22 @@ export class UsersService {
     const data = await this.userRepository.find();
     return data;
   }
-  // async findAllUserInfo() {
-  //   const exInfo = this.userRepository
-  //     .createQueryBuilder('user')
-  //     .leftJoinAndSelect('user.Posts', 'p')
-  //     .select([
-  //       'user.id',
-  //       'user.email',
-  //       'p.title',
-  //       'p.content',
-  //     ])
-  //     .where('user.id = :id', { id: 1 })
-  //     .getOne();
-  //   return exInfo;
-  // }
+  async findAllUserInfo(id: any) {
+    const exInfo = this.userRepository
+      .createQueryBuilder('u')
+      .leftJoinAndSelect('u.Reviews', 'writer')
+      .leftJoinAndSelect('u.Reviews2', 'seller')
+      .select([
+        'u.id',
+        'u.email',
+        'p.title',
+        'p.content',
+        'p.Userid',
+      ])
+      .where(`u.id = ${id}`)
+      .getMany();
+    return exInfo;
+  }
   fuck() {
     return 'fjkdlfjlkas';
   }

@@ -25,7 +25,7 @@ export class Users {
   @Column('int', { name: 'age' })
   age: number;
 
-  @Column('varchar', { name: 'job', length: 10 })
+  @Column('varchar', { name: 'job', length: 10, nullable: true })
   job: string;
 
   @Column({
@@ -36,8 +36,8 @@ export class Users {
   })
   role: UserRole;
 
-  @OneToMany(() => Posts, (posts) => posts.User)
-  Posts: Posts[];
+  @OneToMany(() => Posts, (posts) => posts.users)
+  posts: Posts[];
 
   @OneToMany(() => Reviews, (reviews) => reviews.Writer)
   Reviews: Reviews[];

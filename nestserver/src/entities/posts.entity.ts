@@ -15,12 +15,12 @@ export class Posts {
   @Column('text', { name: 'content' })
   content: string;
 
-  @ManyToOne(() => Users, (users) => users.Posts, {
+  @ManyToOne(() => Users, (user) => user.posts, {
     nullable: false,
     onDelete: 'CASCADE',
   })
   @JoinColumn([{ name: 'Userid', referencedColumnName: 'id' }])
-  User: Users;
+  users: Users;
 
   @OneToOne(() => Reviews, (reviews) => reviews.Posts)
   Reviews: Reviews[];
