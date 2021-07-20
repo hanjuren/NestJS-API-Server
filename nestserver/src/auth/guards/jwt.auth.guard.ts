@@ -23,7 +23,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       const message = this.authService.tokenUnauthorized();
       throw err || new UnauthorizedException(`${message}`, "UnauthorizedException");
     }
-    console.log(user);
     return user;
   }
 }

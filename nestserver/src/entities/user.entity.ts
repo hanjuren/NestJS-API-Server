@@ -26,7 +26,7 @@ export class Users {
   age: number;
 
   @Column('varchar', { name: 'job', length: 10, nullable: true })
-  job: string;
+  job: string[];
 
   @Column({
     name: 'role',

@@ -1,5 +1,6 @@
-import { IsEmail, IsEnum, IsNumber, IsString } from "class-validator";
-import { UserRole } from "src/entities/user.entity";
+import { Type } from "class-transformer";
+import { ArrayMaxSize, ArrayMinSize, IsArray, IsEmail, IsEnum, IsNumber, IsString, ValidateNested } from "class-validator";
+import { UserRole, Users } from "src/entities/user.entity";
 
 export class CreateUserDto {
   @IsEmail()
@@ -11,8 +12,9 @@ export class CreateUserDto {
   @IsNumber()
   public age: number;
 
-  @IsString()
-  public job: string;
+  @IsArray()
+  @ArrayMinSize(2)
+  public job: any[];
 
   @IsEnum(UserRole)
   role: UserRole = UserRole.ADMIN;

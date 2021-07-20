@@ -34,14 +34,14 @@ export class UsersController {
   async allUserGet(@Req() req) {
       const data = await this.usersService.allUserGet();
       const token = req.headers.authorization;
-      return {data, token};
+      return req.user;
   }
 
   @Get('all')
-  async all(@Query() query: any) {
-    console.log(query);
-    const id = query.id;
-    return this.usersService.findAllUserInfo(id);
+  async all(@Req() req) {
+    console.log(req);
+    // const id = query.id;
+    // return this.usersService.findAllUserInfo(id);
   }
   // 로그인
   @UseGuards(LocalAuthGuard)
