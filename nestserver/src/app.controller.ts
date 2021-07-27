@@ -23,4 +23,9 @@ export class AppController {
     console.log('--------------------------------');    
     return req.user;
   }
+
+  @Get('hello')
+  hello() {
+    return 'hello';
+  }
 }
