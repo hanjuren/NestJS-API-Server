@@ -28,4 +28,8 @@ export class AppController {
   hello() {
     return 'hello';
   }
+  @Get('hell')
+  hell() {
+    return 'sdsa';
+  }
 }
