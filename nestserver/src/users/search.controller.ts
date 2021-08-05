@@ -8,6 +8,7 @@ export class SerachController {
     ) {}
   @Get('product')
   hi() {
+    const i = '리베이스?';
     return this.usersService.fuck();
   }
 }
