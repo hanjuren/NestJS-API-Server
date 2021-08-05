@@ -8,6 +8,7 @@ import { AuthModule } from 'src/auth/auth.module';
 import { SerachController } from './search.controller';
 
 @Module({
+  // 임포트 하는곳
   imports: [
     TypeOrmModule.forFeature([Users, Posts]),
     forwardRef(() => AuthModule),
