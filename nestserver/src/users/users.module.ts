@@ -12,6 +12,7 @@ import { SerachController } from './search.controller';
     TypeOrmModule.forFeature([Users, Posts]),
     forwardRef(() => AuthModule),
   ],
+  // 컨트롤러 명시
   controllers: [UsersController, SerachController],
   providers: [UsersService],
   exports: [UsersService],
